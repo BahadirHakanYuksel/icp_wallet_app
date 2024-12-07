@@ -1,0 +1,24 @@
+type TransferResult = 
+ variant {
+   err: text;
+   ok: nat;
+ };
+type SubAccount = 
+ record {
+   balance: nat;
+   name: text;
+ };
+type Account = 
+ record {
+   balance: nat;
+   owner: principal;
+   subAccounts: vec SubAccount;
+ };
+service : {
+  addSubAccount: (text) -> (opt Account);
+  createAccount: () -> (Account);
+  deposit: (nat) -> (TransferResult);
+  getAccountBalance: () -> (nat);
+  transferToken: (principal, nat) -> (TransferResult);
+  withdraw: (nat) -> (TransferResult);
+}
